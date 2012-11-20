@@ -85,6 +85,10 @@ class Client(models.Model):
     redirect_uri = models.URLField(null=True)
 
 
+    def __str__(self):
+        return self.name
+
+
 class AccessRange(models.Model):
     """Stores access range data, also known as scope.
 
@@ -101,6 +105,9 @@ class AccessRange(models.Model):
     """
     key = models.CharField(unique=True, max_length=SCOPE_LENGTH, db_index=True)
     description = models.TextField(blank=True)
+
+    def __str__(self):
+        return self.key
 
 
 class AccessToken(models.Model):
