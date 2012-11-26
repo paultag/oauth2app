@@ -16,6 +16,12 @@ from .lib.uri import add_parameters, add_fragments, normalize
 from .models import Client, AccessRange, Code, AccessToken, KeyGenerator
 
 
+def get_authorized_clients(user):
+    tokens = AccessToken.objects.filter(user=user)
+    clients = {x.client.id: x.client for x in tokens}
+    return clients.values()
+
+
 class AuthorizationException(OAuth2Exception):
     """Authorization exception base class."""
     pass
